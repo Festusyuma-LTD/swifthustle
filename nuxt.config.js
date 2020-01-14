@@ -23,6 +23,10 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/styles/main.css',
+    '@/assets/fontawesome/css/all.css',
+    '@/assets/fontawesome/css/brands.css',
+    '@/assets/fontawesome/css/solid.css'
   ],
   /*
   ** Plugins to load before mounting the App
