@@ -5,7 +5,7 @@
         <p class="text-center">
           spin Mill
         </p>
-        <b-form @reset="onReset">
+        <b-form>
           <b-form-group>
             <b-form-input
               v-model="loginData.email"

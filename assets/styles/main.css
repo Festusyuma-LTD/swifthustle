@@ -8,3 +8,15 @@ html, body {
   /* box-sizing: border-box; */
 }
 div#__nuxt, #__layout, #__layout>div, #app { min-height: 100vh; }
+@font-face {
+  font-family: 'Freestyle Script Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Freestyle Script Regular'), url('../fonts/FREESCPT.woff') format('woff');
+}
+@font-face {
+  font-family: 'NunitoSans';
+  font-style: normal;
+  font-weight: normal;
+  src: local('NunitoSans'), url('../fonts/NunitoSans-BlackItalic.ttf') format('ttf');
+}

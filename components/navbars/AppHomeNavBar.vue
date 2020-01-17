@@ -3,7 +3,7 @@
     <div class="home-navbar">
       <b-navbar class="navbar" toggleable="lg">
         <div class="container-fluid">
-          <b-navbar-brand href="#">
+          <b-navbar-brand id="logo" href="#">
             SpinMill
           </b-navbar-brand>
 
@@ -53,6 +53,15 @@ export default {
 .home-navbar{
   .navbar{
     background: transparent;
+    #logo{
+      text-align: left;
+      font-family: Freestyle Script Regular;
+      font-size: 60px;
+      font-weight:600;
+      letter-spacing: 0;
+      color: #FFD00A;
+      opacity: 1;
+    }
   }
   #btn-one{
     background: #FFD009;
