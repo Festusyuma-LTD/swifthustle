@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-4 mx-auto">
-        <p class="text-center">
-          spin Mill
-        </p>
+      <div class="col-md-5 mx-auto text-center">
+        <a id="logo" href="/" class="">
+          SpinMill
+        </a>
         <b-form>
           <b-form-group>
             <b-form-input
@@ -29,7 +29,7 @@
             Log in
           </b-button>
         </b-form>
-        <p class="text-center">
+        <p class="text-center text-light">
           New user? <a href="/register">Register here <i class="fas fa-arrow-right" /></a>
         </p>
       </div>
@@ -70,6 +70,16 @@ export default {
     font-weight: 700;
     font-size: 20px;
     margin: 10px 0px;
+  }
+  #logo{
+    text-align: center !important;
+    font-family: Freestyle Script Regular;
+    font-size: 60px;
+    font-weight:600;
+    letter-spacing: 0;
+    color: #FFD00A;
+    opacity: 1;
+    margin: 50px 0px !important;
   }
   a{
     color: #FFD009;

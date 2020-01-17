@@ -3,9 +3,9 @@
     <div class="row register-container" align-h="between">
       <div class="col-md-6 mx-auto mr-0">
         <div class="image-container">
-          <h1 class="logo">
+          <a href="/" class="logo">
             SpinMill
-          </h1>
+          </a>
           <p class="text">
             Join the Winners
           </p>
@@ -101,6 +101,10 @@ export default {
       background-position: center;
       background-size: 100%;
       background-repeat: no-repeat;
+      .logo:hover{
+        text-decoration: none;
+        color: #FFD00A;
+      }
       .text{
         text-align: right;
         font-family: Freestyle Script Regular;
