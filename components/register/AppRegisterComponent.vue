@@ -6,7 +6,9 @@
           <h1 class="logo">
             SpinMill
           </h1>
-          <p class="text">Join the Winners</p>
+          <p class="text">
+            Join the Winners
+          </p>
         </div>
         <!-- <b-img src="@/assets/images/register.png" class="" alt="" /> -->
       </div>
