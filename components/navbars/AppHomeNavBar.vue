@@ -71,7 +71,7 @@ export default {
     font-weight: 600;
     border-radius: 40px;
     border:2px solid #FFD009;
-    box-shadow: 3px 4px 15px .5px #aca6a6;
+    box-shadow: 3px 4px 15px .5px #1d1d1d;
     margin: 0px 0px;
   }
   #btn-two{
@@ -83,7 +83,7 @@ export default {
     font-size:20px;
     font-weight: 600;
     border-radius: 40px;
-    box-shadow: 3px 4px 15px .5px #aca6a6;
+    box-shadow: 3px 4px 15px .5px #1d1d1d;
   }
 }
 </style>

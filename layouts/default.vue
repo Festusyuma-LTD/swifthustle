@@ -7,6 +7,7 @@
 <style>
 html {
   height: 100% !important;
+  background: rgb(30, 11, 61);
 }
 /* html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
