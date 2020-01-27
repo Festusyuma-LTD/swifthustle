@@ -11,7 +11,9 @@
             <h1 id="intro-statement">
               Get <br><b>1000%</b><br>On registration
             </h1>
-            <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+            <p class="intro-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+            </p>
             <b-button id="join-btn" size="lg">
               Join us
             </b-button>
@@ -26,6 +28,7 @@
 // import Logo from '~/components/Logo.vue'
 import homeNavbar from '@/components/navbars/AppHomeNavBar.vue'
 export default {
+  layout: 'landingPage',
   components: {
     // Logo
     homeNavbar

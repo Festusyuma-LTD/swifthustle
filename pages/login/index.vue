@@ -9,6 +9,7 @@
 <script>
 import AppLoginComponent from '@/components/login/AppLoginComponent.vue'
 export default {
+  layout: 'register',
   components: {
     AppLoginComponent
   }
