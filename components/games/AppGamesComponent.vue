@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid">
-    <h1 id="games-header">
+    <h1 id="games-list-header">
       Live Games
     </h1>
     <div class="row">
       <div class="col-md-6 col-lg-4 my-2">
-        <div class="games-wrapper">
+        <div class="games">
           <b-img src="@/assets/images/wheelcoins.png" fluid alt="Responsive image" />
           <h3 class="game-tile">
             10 for 50,000
@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="col-md-6 col-lg-4 my-2">
-        <div class="games-wrapper">
+        <div class="games">
           <b-img src="@/assets/images/wheelcoins.png" fluid alt="Responsive image" />
           <h3 class="game-tile">
             10 for 50,000
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="col-md-6 col-lg-4 my-2">
-        <div class="games-wrapper">
+        <div class="games">
           <b-img src="@/assets/images/wheelcoins.png" fluid alt="Responsive image" />
           <h3 class="game-tile">
             10 for 50,000
@@ -49,11 +49,11 @@ export default {}
 </script>
 
 <style lang="scss" scoped>
-#games-header{
+#games-list-header{
   color: #f8f8f8;
   margin-bottom: 30px;
 }
-.games-wrapper {
+.games {
   padding: 30px;
   border-radius: 15px;
   background: #77b3f7;

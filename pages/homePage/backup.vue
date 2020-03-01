@@ -2,7 +2,7 @@
   <div>
     <div class="wrapper">
       <!-- Sidebar Holder -->
-      <nav id="sidebar" v-bind:class="{ active: isActive }">
+      <!-- <nav id="sidebar" v-bind:class="{ active: isActive }">
         <div class="sidebar-header">
           <h3 class="logo">
             Spin Mill
@@ -29,13 +29,9 @@
                 </b-card-body>
               </b-collapse>
             </li>
-            <li class="sidebar-contents d-block d-md-none">
-              <a href=""><img src="@/assets/images/Dashboard.svg" alt=""> <span class="text-nowrap">Load Wallet</span></a>
-            </li>
           </ul>
         </div>
-      </nav>
-
+      </nav> -->
       <!-- Page Content Holder -->
       <div id="content">
         <b-navbar class="navbar">
@@ -106,8 +102,7 @@ export default {
 <style lang="scss" scoped>
 body {
     font-family: 'Poppins', sans-serif;
-    background: #0D0024;
-    overflow: hidden;
+    background: #fafafa;
 }
 p {
     font-family: 'Poppins', sans-serif;
@@ -140,6 +135,9 @@ a, a:hover, a:focus {
     border-bottom: 1px dashed #ddd;
     margin: 40px 0;
 }
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
 .wrapper {
     display: flex;
     width: 100%;
@@ -160,7 +158,7 @@ a, a:hover, a:focus {
         // padding: 15%;
         margin: 15px 0px;
         span{
-          font-size: 20px;
+          font-size: 25px;
           padding: 0% 10% 0%;
           // margin-top: 10px;
         }
@@ -175,7 +173,7 @@ a, a:hover, a:focus {
 }
 #sidebar.active {
     margin-left: -300px;
-    transform: rotateY(100deg);
+    transform: rotateY(90deg);
 }
 #sidebar .sidebar-header {
     padding: 40px 40px 60px;
@@ -189,12 +187,32 @@ a, a:hover, a:focus {
       opacity: 1;
       margin: 10px 0px !important;
     }
+    // background: #6d7fcc;
 }
-
+// #sidebar ul.components {
+//     padding: 20px 0;
+//     border-bottom: 1px solid #47748b;
+// }
+// #sidebar ul p {
+//     color: #f8f8f8;
+//     padding: 10px;
+// }
+// #sidebar ul li a {
+//     padding: 10px;
+//     font-size: 1.1em;
+//     display: block;
+// }
+// #sidebar ul li a:hover {
+//     color: #7386D5;
+//     background: #fff;
+// }
+// #sidebar ul li.active > a, a[aria-expanded="true"] {
+//     color: #fff;
+//     background: #6d7fcc;
+// }
 a[data-toggle="collapse"] {
     position: relative;
 }
-
 .dropdown-toggle::after {
     display: block;
     position: absolute;
@@ -202,10 +220,33 @@ a[data-toggle="collapse"] {
     right: 20px;
     transform: translateY(-50%);
 }
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+}
+ul.CTAs {
+    padding: 20px;
+}
 
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.download {
+    background: #fff;
+    color: #7386D5;
+}
+
+a.article, a.article:hover {
+    background: #6d7fcc !important;
+    color: #fff !important;
+}
+
 #content {
   width: 100%;
   padding: 30px;
@@ -291,8 +332,8 @@ a[data-toggle="collapse"] {
 }
 @media (max-width: 768px) {
     #sidebar {
-        margin-left: -300px;
-        transform: rotateY(90deg);
+        margin-left: -250px;
+        transform: rotateY(100deg);
     }
     #sidebar.active {
         margin-left: 0;
@@ -316,53 +357,6 @@ a[data-toggle="collapse"] {
     }
     #sidebarCollapse.active span:last-of-type {
         transform: rotate(-45deg) translate(1px, -1px);
-    }
-
-    #content .navbar{
-      .wallet-wrapper{
-      display: flex;
-      width: 200px;
-      i {
-        font-size: 35px;
-        margin-right: 10px;
-        width: 35px;
-        color: #FFD009;
-      }
-      .wallet-details{
-        width: 155px;
-        div{
-          margin: 0px;
-          padding: 0px;
-          font-size: 10px;
-          width: 100%;
-          display: flex;
-          color: #f8f8f8;
-          b{
-            width: 40%;
-          }
-          p{
-            width: 70%;
-            margin: 0%;
-            color: #f8f8f8;
-          }
-        }
-        #wallet{
-          color: #FFD009;
-          font-size: 14px;
-          p{
-            color: #FFD009;
-          }
-        }
-      }
-    }
-    .load-wallet-btn{
-      border: 1px solid #FFD009;
-      border-radius: 25px;
-      padding: 4px 10px;
-      background: transparent;
-      color: #f8f8f8;
-      display: none;
-    }
     }
 }
 </style>
