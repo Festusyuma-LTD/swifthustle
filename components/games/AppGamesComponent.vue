@@ -15,7 +15,7 @@
               Play with 10 people and stand to win the chance to win 50,000
             </p>
           </div>
-          <a href="" class="btn">Play</a>
+          <a href="" class="btn">Join</a>
         </div>
       </div>
       <div class="columns my-2">
@@ -29,7 +29,7 @@
               Play with 10 people and stand to win the chance to win 50,000
             </p>
           </div>
-          <a href="" class="btn">Play</a>
+          <a href="" class="btn">Join</a>
         </div>
       </div>
       <div class="columns my-2">
@@ -43,7 +43,7 @@
               Play with 10 people and stand to win the chance to win 50,000
             </p>
           </div>
-          <a href="" class="btn">Play</a>
+          <a href="" class="btn">Join</a>
         </div>
       </div>
       <div class="columns my-2">
@@ -57,7 +57,7 @@
               Play with 10 people and stand to win the chance to win 50,000
             </p>
           </div>
-          <a href="" class="btn">Play</a>
+          <a href="" class="btn">Join</a>
         </div>
       </div>
       <div class="columns my-2">
@@ -71,7 +71,7 @@
               Play with 10 people and stand to win the chance to win 50,000
             </p>
           </div>
-          <a href="" class="btn">Play</a>
+          <a href="" class="btn">Join</a>
         </div>
       </div>
     </div>

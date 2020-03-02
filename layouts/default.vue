@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div v-bind:class="{ toggled: isToggled }" class="page-wrapper chiller-theme">
-      <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <div v-bind:class="{ toggled: isToggled }" class="page-wrapper">
+      <div id="show-sidebar" class="btn btn-sm btn-dark">
         <i @click="toggleClassActive" class="fas fa-bars" />
-      </a>
+      </div>
       <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
-          <div id="close-sidebar">
-            <i @click="toggleClassActive" class="fas fa-times" />
-          </div>
           <div class="sidebar-header">
+            <div id="close-sidebar">
+              <i @click="toggleClassActive" class="fas fa-times" />
+            </div>
             <h3 class="logo">
               Spin Mill
             </h3>
@@ -45,6 +45,50 @@
       <!-- sidebar-wrapper  -->
       <main class="page-content">
         <div class="container-fluid">
+          <b-navbar class="navbar">
+            <!-- <button id="sidebarCollapse" v-bind:class="{ active: isActive }" @click="toggleClassActive" type="button" class="navbar-btn">
+              <span />
+              <span />
+              <span />
+            </button> -->
+
+            <!-- Right aligned nav items -->
+            <b-navbar-nav class="ml-auto">
+              <b-nav-item href="#" class="my-auto">
+                <div class="wallet-wrapper">
+                  <i class="fa fa-wallet" />
+                  <div class="wallet-details">
+                    <div id="wallet">
+                      <b>Wallet</b> <p>&#8358;10,000,000</p>
+                    </div>
+                    <div><b>Bonus</b> <p>&#8358;20,000</p> </div>
+                  </div>
+                </div>
+              </b-nav-item>
+              <b-nav-item href="#" class="my-auto">
+                <a href="" class="btn load-wallet-btn">Load Wallet</a>
+              </b-nav-item>
+              <b-nav-item-dropdown class="my-auto" right>
+                <!-- Using 'button-content' slot -->
+                <template v-slot:button-content>
+                  <img
+                    src="@/assets/images/dafom.jpg"
+                    class="user-img"
+                    height="50"
+                    width="50"
+                    style="border-radius: 50%"
+                    alt="profile-image"
+                  >
+                </template>
+                <b-dropdown-item href="#">
+                  Profile
+                </b-dropdown-item>
+                <b-dropdown-item href="#">
+                  Sign Out
+                </b-dropdown-item>
+              </b-nav-item-dropdown>
+            </b-navbar-nav>
+          </b-navbar>
           <div class="body">
             <nuxt />
           </div>
@@ -59,10 +103,38 @@
 export default {
   data () {
     return {
-      isToggled: true
+      isToggled: false,
+      windowWidth: 0,
+      windowHeight: 0
     }
   },
+  watch: {
+    windowWidth: {
+      handler (newData, oldata) {
+        if (newData >= 1024) {
+          this.isToggled = true
+        } else if (newData < 1024) {
+          this.isToggled = false
+        }
+      }
+    }
+  },
+  mounted () {
+    this.$nextTick(function () {
+      window.addEventListener('resize', this.getWindowWidth)
+      window.addEventListener('resize', this.getWindowHeight)
+      this.getWindowWidth()
+      this.getWindowHeight()
+    })
+  },
+
   methods: {
+    getWindowWidth (event) {
+      this.windowWidth = document.documentElement.clientWidth
+    },
+    getWindowHeight (event) {
+      this.windowHeight = document.documentElement.clientHeight
+    },
     toggleClassActive () {
       this.isToggled = !this.isToggled
     }
@@ -71,49 +143,6 @@ export default {
 </script>
 
 <style lang="scss">
-@keyframes swing {
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(10deg);
-  }
-  30% {
-    transform: rotate(0deg);
-  }
-  40% {
-    transform: rotate(-10deg);
-  }
-  50% {
-    transform: rotate(0deg);
-  }
-  60% {
-    transform: rotate(5deg);
-  }
-  70% {
-    transform: rotate(0deg);
-  }
-  80% {
-    transform: rotate(-5deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes sonar {
-  0% {
-    transform: scale(0.9);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-body {
-  font-size: 0.9rem;
-}
 .page-wrapper .sidebar-wrapper,
 .sidebar-wrapper .sidebar-brand > a,
 .sidebar-wrapper .sidebar-dropdown > a:after,
@@ -131,32 +160,69 @@ body {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-
+.page-content{
+  background: #0D0024;
+  .navbar{
+    background :transparent ;
+    color: #ddd;
+    .wallet-wrapper{
+      display: flex;
+      width: 300px;
+      i {
+        font-size: 55px;
+        margin-right: 10px;
+        width: 55px;
+        color: #FFD009;
+      }
+      .wallet-details{
+        width: 190px;
+        div{
+          margin: 0px;
+          padding: 0px;
+          font-size: 14px;
+          width: 100%;
+          display: flex;
+          color: #f8f8f8;
+          b{
+            width: 40%;
+          }
+          p{
+            width: 70%;
+            margin: 0%;
+            color: #f8f8f8;
+          }
+        }
+        #wallet{
+          color: #FFD009;
+          font-size: 18px;
+          p{
+            color: #FFD009;
+          }
+        }
+      }
+    }
+    .load-wallet-btn{
+      border: 1px solid #FFD009;
+      border-radius: 25px;
+      padding: 8px 20px;
+      background: transparent;
+      color: #f8f8f8;
+    }
+  }
+}
 /*----------------page-wrapper----------------*/
 
 .page-wrapper {
   height: 100vh;
+  background: #0D0024;
 }
-
-.page-wrapper .theme {
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-  border-radius: 4px;
-  margin: 2px;
-}
-
-.page-wrapper .theme.chiller-theme {
-  background: #1e2229;
-}
-
 /*----------------toggeled sidebar----------------*/
 
 .page-wrapper.toggled .sidebar-wrapper {
   left: 0px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
   .page-wrapper.toggled .page-content {
     padding-left: 300px;
   }
@@ -169,6 +235,7 @@ body {
   border-radius: 0 4px 4px 0px;
   width: 35px;
   transition-delay: 0.3s;
+  z-index: 1;
 }
 .page-wrapper.toggled #show-sidebar {
   left: -40px;
@@ -183,6 +250,27 @@ body {
   top: 0;
   left: -300px;
   z-index: 999;
+  background: #331F4A;
+  .sidebar-header {
+    padding: 20px;
+    overflow: hidden;
+    #close-sidebar {
+      cursor: pointer;
+      font-size: 20px;
+      color: #FFD00A;
+      text-align: right;
+    }
+    .logo{
+      text-align: center !important;
+      font-family: Freestyle Script Regular;
+      font-size: 60px;
+      font-weight:600;
+      letter-spacing: 0;
+      color: #FFD00A;
+      opacity: 1;
+      margin: 10px 0px !important;
+    }
+  }
   .sideNav-content-wrapper{
       padding: 0% 15%;
       .sidebar-contents{
@@ -203,19 +291,6 @@ body {
       }
     }
 }
-
-.sidebar-wrapper ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar-wrapper a {
-  text-decoration: none;
-}
-
-/*----------------sidebar-content----------------*/
-
 .sidebar-content {
   max-height: calc(100% - 30px);
   height: calc(100% - 30px);
@@ -227,238 +302,6 @@ body {
   overflow-y: hidden;
 }
 
-/*--------------------sidebar-brand----------------------*/
-
-.sidebar-wrapper .sidebar-brand {
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-}
-
-.sidebar-wrapper .sidebar-brand > a {
-  text-transform: uppercase;
-  font-weight: bold;
-  flex-grow: 1;
-}
-
-.sidebar-wrapper .sidebar-brand #close-sidebar {
-  cursor: pointer;
-  font-size: 20px;
-}
-/*--------------------sidebar-header----------------------*/
-
-.sidebar-wrapper .sidebar-header {
-  padding: 20px;
-  overflow: hidden;
-}
-
-.sidebar-wrapper .sidebar-header .user-pic {
-  float: left;
-  width: 60px;
-  padding: 2px;
-  border-radius: 12px;
-  margin-right: 15px;
-  overflow: hidden;
-}
-
-.sidebar-wrapper .sidebar-header .user-pic img {
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-}
-
-.sidebar-wrapper .sidebar-header .user-info {
-  float: left;
-}
-
-.sidebar-wrapper .sidebar-header .user-info > span {
-  display: block;
-}
-
-.sidebar-wrapper .sidebar-header .user-info .user-role {
-  font-size: 12px;
-}
-
-.sidebar-wrapper .sidebar-header .user-info .user-status {
-  font-size: 11px;
-  margin-top: 4px;
-}
-
-.sidebar-wrapper .sidebar-header .user-info .user-status i {
-  font-size: 8px;
-  margin-right: 4px;
-  color: #5cb85c;
-}
-
-/*-----------------------sidebar-search------------------------*/
-
-.sidebar-wrapper .sidebar-search > div {
-  padding: 10px 20px;
-}
-
-/*----------------------sidebar-menu-------------------------*/
-
-.sidebar-wrapper .sidebar-menu {
-  padding-bottom: 10px;
-}
-
-.sidebar-wrapper .sidebar-menu .header-menu span {
-  font-weight: bold;
-  font-size: 14px;
-  padding: 15px 20px 5px 20px;
-  display: inline-block;
-}
-
-.sidebar-wrapper .sidebar-menu ul li a {
-  display: inline-block;
-  width: 100%;
-  text-decoration: none;
-  position: relative;
-  padding: 8px 30px 8px 20px;
-}
-
-.sidebar-wrapper .sidebar-menu ul li a i {
-  margin-right: 10px;
-  font-size: 12px;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  border-radius: 4px;
-}
-
-.sidebar-wrapper .sidebar-menu ul li a:hover > i::before {
-  display: inline-block;
-  animation: swing ease-in-out 0.5s 1 alternate;
-}
-
-.sidebar-wrapper .sidebar-menu .sidebar-dropdown > a:after {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  content: "\f105";
-  font-style: normal;
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  background: 0 0;
-  position: absolute;
-  right: 15px;
-  top: 14px;
-}
-
-.sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu ul {
-  padding: 5px 0;
-}
-
-.sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li {
-  padding-left: 25px;
-  font-size: 13px;
-}
-
-.sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a:before {
-  content: "\f111";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 400;
-  font-style: normal;
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin-right: 10px;
-  font-size: 8px;
-}
-
-.sidebar-wrapper .sidebar-menu ul li a span.label,
-.sidebar-wrapper .sidebar-menu ul li a span.badge {
-  float: right;
-  margin-top: 8px;
-  margin-left: 5px;
-}
-
-.sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a .badge,
-.sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a .label {
-  float: right;
-  margin-top: 0px;
-}
-
-.sidebar-wrapper .sidebar-menu .sidebar-submenu {
-  display: none;
-}
-
-.sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > a:after {
-  transform: rotate(90deg);
-  right: 17px;
-}
-
-/*--------------------------side-footer------------------------------*/
-
-.sidebar-footer {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  display: flex;
-}
-
-.sidebar-footer > a {
-  flex-grow: 1;
-  text-align: center;
-  height: 30px;
-  line-height: 30px;
-  position: relative;
-}
-
-.sidebar-footer > a .notification {
-  position: absolute;
-  top: 0;
-}
-
-.badge-sonar {
-  display: inline-block;
-  background: #980303;
-  border-radius: 50%;
-  height: 8px;
-  width: 8px;
-  position: absolute;
-  top: 0;
-}
-
-.badge-sonar:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  border: 2px solid #980303;
-  opacity: 0;
-  border-radius: 50%;
-  width: 100%;
-  height: 100%;
-  animation: sonar 1.5s infinite;
-}
-
-/*--------------------------page-content-----------------------------*/
-
-.page-wrapper .page-content {
-  display: inline-block;
-  width: 100%;
-  padding-left: 0px;
-  padding-top: 20px;
-}
-
-.page-wrapper .page-content > div {
-  padding: 20px 40px;
-}
-
-.page-wrapper .page-content {
-  overflow-x: hidden;
-}
-
-/*------scroll bar---------------------*/
-
 ::-webkit-scrollbar {
   width: 5px;
   height: 7px;
@@ -468,15 +311,15 @@ body {
   height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #525965;
+  background: #331F4A;
   border: 0px none #ffffff;
   border-radius: 0px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #525965;
+  background: #0D0024;
 }
 ::-webkit-scrollbar-thumb:active {
-  background: #525965;
+  background: #0D0024;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -492,77 +335,52 @@ body {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
-
-/*-----------------------------chiller-theme-------------------------------------------------*/
-
-.chiller-theme .sidebar-wrapper {
-    background: #31353D;
-}
-
-.chiller-theme .sidebar-wrapper .sidebar-header,
-.chiller-theme .sidebar-wrapper .sidebar-search,
-.chiller-theme .sidebar-wrapper .sidebar-menu {
-    border-top: 1px solid #3a3f48;
-}
-
-.chiller-theme .sidebar-wrapper .sidebar-search input.search-menu,
-.chiller-theme .sidebar-wrapper .sidebar-search .input-group-text {
-    border-color: transparent;
-    box-shadow: none;
-}
-
-.chiller-theme .sidebar-wrapper .sidebar-header .user-info .user-role,
-.chiller-theme .sidebar-wrapper .sidebar-header .user-info .user-status,
-.chiller-theme .sidebar-wrapper .sidebar-search input.search-menu,
-.chiller-theme .sidebar-wrapper .sidebar-search .input-group-text,
-.chiller-theme .sidebar-wrapper .sidebar-brand>a,
-.chiller-theme .sidebar-wrapper .sidebar-menu ul li a,
-.chiller-theme .sidebar-footer>a {
-    color: #818896;
-}
-
-.chiller-theme .sidebar-wrapper .sidebar-menu ul li:hover>a,
-.chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active>a,
-.chiller-theme .sidebar-wrapper .sidebar-header .user-info,
-.chiller-theme .sidebar-wrapper .sidebar-brand>a:hover,
-.chiller-theme .sidebar-footer>a:hover i {
-    color: #b8bfce;
-}
-
-.page-wrapper.chiller-theme.toggled #close-sidebar {
-    color: #bdbdbd;
-}
-
-.page-wrapper.chiller-theme.toggled #close-sidebar:hover {
-    color: #ffffff;
-}
-
-.chiller-theme .sidebar-wrapper ul li:hover a i,
-.chiller-theme .sidebar-wrapper .sidebar-dropdown .sidebar-submenu li a:hover:before,
-.chiller-theme .sidebar-wrapper .sidebar-search input.search-menu:focus+span,
-.chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active a i {
-    color: #16c7ff;
-    text-shadow:0px 0px 10px rgba(22, 199, 255, 0.5);
-}
-
-.chiller-theme .sidebar-wrapper .sidebar-menu ul li a i,
-.chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown div,
-.chiller-theme .sidebar-wrapper .sidebar-search input.search-menu,
-.chiller-theme .sidebar-wrapper .sidebar-search .input-group-text {
-    background: #3a3f48;
-}
-
-.chiller-theme .sidebar-wrapper .sidebar-menu .header-menu span {
-    color: #6c7b88;
-}
-
-.chiller-theme .sidebar-footer {
-    background: #3a3f48;
-    box-shadow: 0px -1px 5px #282c33;
-    border-top: 1px solid #464a52;
-}
-
-.chiller-theme .sidebar-footer>a:first-child {
-    border-left: none;
+@media (max-width: 768px) {
+    .page-content .navbar{
+      .wallet-wrapper{
+      display: flex;
+      width: 200px;
+      i {
+        font-size: 35px;
+        margin-right: 10px;
+        width: 35px;
+        color: #FFD009;
+      }
+      .wallet-details{
+        width: 155px;
+        div{
+          margin: 0px;
+          padding: 0px;
+          font-size: 10px;
+          width: 100%;
+          display: flex;
+          color: #f8f8f8;
+          b{
+            width: 40%;
+          }
+          p{
+            width: 70%;
+            margin: 0%;
+            color: #f8f8f8;
+          }
+        }
+        #wallet{
+          color: #FFD009;
+          font-size: 14px;
+          p{
+            color: #FFD009;
+          }
+        }
+      }
+    }
+    .load-wallet-btn{
+      border: 1px solid #FFD009;
+      border-radius: 25px;
+      padding: 4px 10px;
+      background: transparent;
+      color: #f8f8f8;
+      display: none;
+    }
+    }
 }
 </style>
