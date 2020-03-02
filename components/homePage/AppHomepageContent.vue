@@ -13,7 +13,7 @@
           <p class="game-description">
             Play with 10 people and stand to win the chance to win 50,000
           </p>
-          <a href="" class="btn">Play</a>
+          <a href="/games" class="btn">Play</a>
         </div>
       </div>
       <div class="col-md-6 col-lg-4 my-2">
@@ -25,7 +25,7 @@
           <p class="game-description">
             Play with 10 people and stand to win the chance to win 50,000
           </p>
-          <a href="" class="btn">Play</a>
+          <a href="/games" class="btn">Play</a>
         </div>
       </div>
       <div class="col-md-6 col-lg-4 my-2">
@@ -37,7 +37,7 @@
           <p class="game-description">
             Play with 10 people and stand to win the chance to win 50,000
           </p>
-          <a href="" class="btn">Play</a>
+          <a href="/games" class="btn">Play</a>
         </div>
       </div>
     </div>
