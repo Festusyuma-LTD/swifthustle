@@ -15,7 +15,10 @@
               Play with 10 people and stand to win the chance to win 50,000
             </p>
           </div>
-          <a href="" class="btn">Join</a>
+          <div class="games-footer">
+            <a href="" class="btn">Join</a>
+            <span class="slots">No Slot</span>
+          </div>
         </div>
       </div>
       <div class="columns my-2">
@@ -29,7 +32,10 @@
               Play with 10 people and stand to win the chance to win 50,000
             </p>
           </div>
-          <a href="" class="btn">Join</a>
+          <div class="games-footer">
+            <a href="" class="btn">Join</a>
+            <span class="slots">No Slot</span>
+          </div>
         </div>
       </div>
       <div class="columns my-2">
@@ -43,7 +49,10 @@
               Play with 10 people and stand to win the chance to win 50,000
             </p>
           </div>
-          <a href="" class="btn">Join</a>
+          <div class="games-footer">
+            <a href="" class="btn">Join</a>
+            <span class="slots">No Slot</span>
+          </div>
         </div>
       </div>
       <div class="columns my-2">
@@ -57,7 +66,10 @@
               Play with 10 people and stand to win the chance to win 50,000
             </p>
           </div>
-          <a href="" class="btn">Join</a>
+          <div class="games-footer">
+            <a href="" class="btn">Join</a>
+            <span class="slots">No Slot</span>
+          </div>
         </div>
       </div>
       <div class="columns my-2">
@@ -71,7 +83,10 @@
               Play with 10 people and stand to win the chance to win 50,000
             </p>
           </div>
-          <a href="" class="btn">Join</a>
+          <div class="games-footer">
+            <a href="" class="btn">Join</a>
+            <span class="slots">No Slot</span>
+          </div>
         </div>
       </div>
     </div>
@@ -102,13 +117,19 @@ export default {}
       height: 50%;
       width: 50%;
   }
-//   .game-details{
-//       z-index: 0 !important;
-//   }
-  .btn{
-    background: #FFFFFF;
-    padding: 5px 40px;
-    border-radius: 30px;
+  .games-footer{
+    span{
+      float: right;
+      color: #F05D31;
+      margin: auto 0px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .btn{
+      background: #FFFFFF;
+      padding: 5px 40px;
+      border-radius: 30px;
+    }
   }
 }
 .columns{
