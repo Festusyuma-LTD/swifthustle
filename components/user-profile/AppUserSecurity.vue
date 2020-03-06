@@ -25,7 +25,9 @@
         </button>
         <b-modal id="modal-center" centered>
           <div class="">
-            <h3 class="text-center my-0">Change Password</h3>
+            <h3 class="text-center my-0">
+              Change Password
+            </h3>
             <div class="forms">
               <b-form>
                 <b-form-input
@@ -49,7 +51,7 @@
                 />
               </b-form>
               <div class="btn-wrapper">
-                <span href="" @click="$bvModal.hide('modal-center')">Cancel</span>
+                <span @click="$bvModal.hide('modal-center')" href="">Cancel</span>
                 <a href="" class="btn">Change</a>
               </div>
             </div>

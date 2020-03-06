@@ -11,7 +11,7 @@
             <b>&#8358; 20,000,000</b>
           </div>
           <div class="bonus details-wrapper">
-            <h3>Main balance</h3>
+            <h3>Bonus</h3>
             <b>&#8358; 20,000</b>
           </div>
         </div>

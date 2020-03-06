@@ -32,9 +32,9 @@
               <b-form-input
                 v-model="registerPayload.firstName"
                 class="input"
-                type="password"
+                type="text"
                 required
-                placeholder="Password"
+                placeholder="first name"
               />
             </b-form-group>
             <b-form-group style="border:0px">
@@ -42,9 +42,9 @@
               <b-form-input
                 v-model="registerPayload.lastName"
                 class="input"
-                type="password"
+                type="text"
                 required
-                placeholder="Password"
+                placeholder="last name"
               />
             </b-form-group>
             <b-form-group style="border:0px">
