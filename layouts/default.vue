@@ -216,7 +216,6 @@ export default {
   height: 100vh;
   background: #0D0024;
 }
-/*----------------toggeled sidebar----------------*/
 
 .page-wrapper.toggled .sidebar-wrapper {
   left: 0px;
@@ -227,7 +226,6 @@ export default {
     padding-left: 300px;
   }
 }
-/*----------------show sidebar button----------------*/
 #show-sidebar {
   position: fixed;
   left: 0;
@@ -240,7 +238,6 @@ export default {
 .page-wrapper.toggled #show-sidebar {
   left: -40px;
 }
-/*----------------sidebar-wrapper----------------*/
 
 .sidebar-wrapper {
   width: 260px;
@@ -285,9 +282,25 @@ export default {
         i{
           font-size: 20px;
         }
+        a{
+          color: #f8f8f8;
+          text-decoration: none;
+        }
+        a:hover{
+          color: #FFD00A;
+          text-decoration: none;
+        }
       }
       .card-links{
-        padding: 0% 0% 0% 30%
+        padding: 0% 0% 0% 30%;
+        a{
+          color: #f8f8f8;
+          text-decoration: none;
+        }
+        a:hover{
+          color: #FFD00A;
+          text-decoration: none;
+        }
       }
     }
 }
