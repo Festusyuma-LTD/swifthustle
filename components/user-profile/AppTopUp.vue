@@ -10,20 +10,18 @@
           placeholder="Amount"
         />
       </b-form-group>
+      <div class="form-wrapper">
+        <div class="input-wrapper">
+          <b-form-radio-group
+            v-model="selected"
+            :options="options"
+            name="radio-inline"
+          />
+        </div>
+      </div>
       <b-form-group style="border:0px; margin: 25px 0px;">
-        <span class="custom-label">Account</span>
-        <b-form-input
-          v-model="form.account"
-          class="input"
-          type="number"
-          required
-          placeholder="Account Number"
-        />
-      </b-form-group>
-      <b-form-group style="border:0px; margin: 25px 0px;">
-        <span class="custom-label">Bank</span>
+        <span class="custom-label">Card</span>
         <b-form-select
-          v-model="form.account"
           class="input"
           required
           placeholder="Bank"
@@ -40,7 +38,12 @@
 export default {
   data () {
     return {
-      form: {}
+      mainProps: { blank: true, blankColor: '#777', class: 'm1' },
+      selected: 'first',
+      options: [
+        { text: 'Debit Card', value: 'debit' },
+        { text: 'Credit Card', value: 'credit' }
+      ]
     }
   }
 }
@@ -92,5 +95,13 @@ export default {
     font-weight: 400;
     padding: 7px;
     margin-top: 5px;
+  }
+  .form-wrapper{
+    color: #f8f8f8;
+    margin: 15px 0px;
+    .input-wrapper{
+      width: 100%;
+      margin-right: 20px;
+    }
   }
 </style>

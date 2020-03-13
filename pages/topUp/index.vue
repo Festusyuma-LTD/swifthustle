@@ -14,12 +14,12 @@
         <div class="col-md-5">
           <div>
             <h1 class="jumbo-header">
-              Withdraw into your bank account
+              Top Up <br> Wallet From
             </h1>
           </div>
         </div>
         <div class="withdrawalForm-wrapper">
-          <AppWithdrawalForm />
+          <AppTopUp />
         </div>
       </div>
     </div>
@@ -27,17 +27,18 @@
 </template>
 
 <script>
-import AppWithdrawalForm from '@/components/user-profile/AppWithdrawalForm.vue'
+import AppTopUp from '@/components/user-profile/AppTopUp.vue'
 export default {
   components: {
-    AppWithdrawalForm
+    AppTopUp
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .wallet-widget {
-  border: 1px solid #ffd009;
+  border: 1px solid #f8f8f893;
+  border-radius: 5px;
   position: relative;
   min-height: 1px;
   padding-right: 15px;
