@@ -16,7 +16,7 @@
       <slot v-else name="wheel" />
     </div>
     <div class="fortuneWheel-wrapper">
-      <div @click="onRotateStart" class="btn-container">
+      <div class="btn-container">
         <div v-if="type === 'canvas'" :style="{ width: btnWidth, height: btnWidth}" class="fortuneWheel-btn">
           {{ btnText }}
         </div>
@@ -91,7 +91,7 @@ export default {
       type: Number,
       default: 0
     },
-    prizes: {
+    usersAndPrizes: {
       type: Array,
       default: () => []
     }
@@ -100,10 +100,16 @@ export default {
     return {
       isRotating: false,
       rotateEndDeg: 0,
-      prizeRes: {}
+      prizeRes: {},
+      prizes: []
     }
   },
   computed: {
+    // return timer from store
+    timer () {
+      // console.log(this.$store.state.timer.timeIsDone, 'nigga')
+      return this.$store.state.timer.timeIsDone
+    },
     // Probability of all prizes and
     probabilityTotal () {
       return sumBy(this.prizes, row => row.probability)
@@ -169,6 +175,24 @@ export default {
         nowEndDeg += -360 - angle
       }
       this.rotateEndDeg = nowEndDeg
+    },
+    usersAndPrizes: {
+      handler (newVal, oldVal) {
+        if (newVal) {
+          this.prizes = newVal
+        }
+      },
+      immediate: true,
+      deep: true
+    },
+    timer: {
+      handler (newVal, oldVal) {
+        if (newVal) {
+          this.onRotateStart()
+        }
+      },
+      immediate: true,
+      deep: true
     }
   },
   created () {
@@ -186,52 +210,95 @@ export default {
       }
       return true
     },
+    getRandomColor () {
+      const letters = '0123456789ABCDEF'
+      let color = '#'
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)]
+      }
+      return color
+    },
     // draw canvas
     drawCanvas () {
-      const canvas = this.$refs.fortuneWheelCanvas
-      if (canvas.getContext) {
+      if (this.prizes.length > 0) {
+        const canvas = this.$refs.fortuneWheelCanvas
+        if (canvas.getContext) {
         // Calculate the circle angle based on the number of prizes
-        const arc = Math.PI / (this.prizes.length / 2)
-        const ctx = canvas.getContext('2d')
-        // 在给定矩形内清空一个矩形
-        ctx.clearRect(0, 0, this.radius * 2, this.radius * 2)
-        // strokeStyle Sets or returns the color, gradient, or pattern used for the stroke
-        ctx.strokeStyle = this.borderColor
-        ctx.lineWidth = this.borderWidth * 2
-        // font Property Sets or returns the current font properties of the text content on the canvas
-        ctx.font = `${this.fontSize}px Arial`
-        this.prizes.forEach((row, i) => {
-          const angle = i * arc - Math.PI / 2
-          ctx.fillStyle = row.bgColor
-          ctx.beginPath()
-          // arc(x, y, r, Start angle, end angle, drawing direction) method to create arc / curve (for creating circles or partial circles)
-          ctx.arc(this.radius, this.radius, this.radius - this.borderWidth, angle, angle + arc, false)
-          ctx.stroke()
-          ctx.arc(this.radius, this.radius, 0, angle + arc, angle, true)
-          ctx.fill()
-          // Lock the canvas (to save the previous canvas state)
-          ctx.save()
-          // ---- Drawing the prizes ----
-          ctx.fillStyle = row.color
-          // translate Method remaps the (0, 0) position on the canvas
-          ctx.translate(this.radius + Math.cos(angle + arc / 2) * this.textRadius, this.radius + Math.sin(angle + arc / 2) * this.textRadius)
-          // rotate Method to rotate the current drawing
-          ctx.rotate(angle + arc / 2 + Math.PI / 2)
-          // The following code renders different effects based on the type of prize and the length of the prize name, such as font, color, and picture effects. (Specifically changed according to the actual situation)
-          if (row.name.length > this.textLength) { // Prize name length exceeds a certain range
-            const content = [row.name.substring(0, this.textLength), row.name.substring(this.textLength)]
-            for (let j = 0; j < content.length; j++) {
-              ctx.fillText(content[j], -ctx.measureText(content[j]).width / 2, (j + 1) * this.lineHeight)
-            }
+          const arc = Math.PI / (this.prizes.length / 2)
+          const ctx = canvas.getContext('2d')
+          // 在给定矩形内清空一个矩形
+          ctx.clearRect(0, 0, this.radius * 2, this.radius * 2)
+          // strokeStyle Sets or returns the color, gradient, or pattern used for the stroke
+          ctx.strokeStyle = this.borderColor
+          ctx.lineWidth = this.borderWidth * 2
+          // font Property Sets or returns the current font properties of the text content on the canvas
+          ctx.font = `${this.fontSize}px 'Baloo Chettan 2', cursive`
+          if (this.prizes.length > 5) {
+            this.prizes.forEach((row, i) => {
+              const angle = i * arc - Math.PI / 2
+              // ctx.strokeStyle = this.getRandomColor()
+              ctx.strokeStyle = row.user === 'user' ? '#FFD700' : 'transparent'
+              ctx.fillStyle = row.user === 'user' ? '#0d0024' : this.getRandomColor()
+              ctx.beginPath()
+              // arc(x, y, r, Start angle, end angle, drawing direction) method to create arc / curve (for creating circles or partial circles)
+              ctx.arc(this.radius, this.radius, this.radius - this.borderWidth, angle, angle + arc, false)
+              ctx.stroke()
+              ctx.arc(this.radius, this.radius, 0, angle + arc, angle, true)
+              ctx.fill()
+              // Lock the canvas (to save the previous canvas state)
+              ctx.save()
+              // ---- Drawing the prizes ----
+              ctx.fillStyle = row.color
+              // translate Method remaps the (0, 0) position on the canvas
+              ctx.translate(this.radius + Math.cos(angle + arc / 2) * this.textRadius, this.radius + Math.sin(angle + arc / 2) * this.textRadius)
+              // rotate Method to rotate the current drawing
+              ctx.rotate(angle + arc / 2 + Math.PI / 2)
+
+              // getting initials here
+              const initials = row.name.match(/\b\w/g) || []
+              row.initials = ((initials.shift() || '') + (initials.pop() || '')).toUpperCase()
+              // if (row.initials) {
+              ctx.fillText(row.initials, -ctx.measureText(row.initials).width / 2, this.lineHeight)
+              // } else {
+              //   ctx.fillText(row.initials, -ctx.measureText(row.initials).width / 2, this.lineHeight)
+              // }
+              ctx.restore()
+            })
           } else {
-            // Draw filled text on the canvas. The default color of the text is black
-            // The measureText () method returns an object containing the specified font width in pixels
-            ctx.fillText(row.name, -ctx.measureText(row.name).width / 2, this.lineHeight)
+            this.prizes.forEach((row, i) => {
+              const angle = i * arc - Math.PI / 2
+              ctx.fillStyle = row.bgColor
+              ctx.beginPath()
+              // arc(x, y, r, Start angle, end angle, drawing direction) method to create arc / curve (for creating circles or partial circles)
+              ctx.arc(this.radius, this.radius, this.radius - this.borderWidth, angle, angle + arc, false)
+              ctx.stroke()
+              ctx.arc(this.radius, this.radius, 0, angle + arc, angle, true)
+              ctx.fill()
+              // Lock the canvas (to save the previous canvas state)
+              ctx.save()
+              // ---- Drawing the prizes ----
+              ctx.fillStyle = row.color
+              // translate Method remaps the (0, 0) position on the canvas
+              ctx.translate(this.radius + Math.cos(angle + arc / 2) * this.textRadius, this.radius + Math.sin(angle + arc / 2) * this.textRadius)
+              // rotate Method to rotate the current drawing
+              ctx.rotate(angle + arc / 2 + Math.PI / 2)
+              // The following code renders different effects based on the type of prize and the length of the prize name, such as font, color, and picture effects. (Specifically changed according to the actual situation)
+              if (row.name.length > this.textLength) { // Prize name length exceeds a certain range
+                const content = [row.name.substring(0, this.textLength), row.name.substring(this.textLength)]
+                for (let j = 0; j < content.length; j++) {
+                  ctx.fillText(content[j], -ctx.measureText(content[j]).width / 2, (j + 1) * this.lineHeight)
+                }
+              } else {
+                // Draw filled text on the canvas. The default color of the text is black
+                // The measureText () method returns an object containing the specified font width in pixels
+                ctx.fillText(row.name, -ctx.measureText(row.name).width / 2, this.lineHeight)
+              }
+              // Returns (adjusts) the current canvas to the previous save () state
+              ctx.restore()
+              // ---- End of drawing prizes ----
+            })
           }
-          // Returns (adjusts) the current canvas to the previous save () state
-          ctx.restore()
-          // ---- End of drawing prizes ----
-        })
+        }
       }
     },
     // Start spinning
@@ -284,7 +351,9 @@ export default {
     width: 100%;
   }
 }
-
+#id{
+  opacity: 0px;
+}
 .fortuneWheel-wrapper {
   position: absolute;
   top: 0;
@@ -298,7 +367,7 @@ export default {
 
 .btn-container {
   position: absolute;
-  cursor: pointer;
+  // cursor: pointer;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

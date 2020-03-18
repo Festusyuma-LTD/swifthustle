@@ -26,7 +26,8 @@ export default {
     '@/assets/styles/main.css',
     '@/assets/fontawesome/css/all.css',
     '@/assets/fontawesome/css/brands.css',
-    '@/assets/fontawesome/css/solid.css'
+    '@/assets/fontawesome/css/solid.css',
+    '@/assets/styles/animate.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -47,7 +48,9 @@ export default {
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    // font-loader
+    'nuxt-webfontloader'
   ],
   /*
   ** Axios module configuration
@@ -63,6 +66,11 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+    }
+  },
+  webfontloader: {
+    google: {
+      families: ['Josefin+Sans', 'Baloo+Chettan']
     }
   }
 }
